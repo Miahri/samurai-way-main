@@ -6,7 +6,7 @@ import {Profile} from './components/Profile';
 
 export function App() {
     return (
-        <div className='app-wrapper'>
+        <div className='appWrapper'>
             <Header />
             <Navbar />
             <Profile />

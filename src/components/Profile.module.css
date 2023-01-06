@@ -1,0 +1,27 @@
+.appContent {
+    grid-area: c;
+    background-color: beige;
+}
+
+.profile {
+    display: grid;
+
+    grid-template-areas: 'ava descr';
+    grid-template-columns: 2fr 7fr;
+}
+
+.walpapper img {
+    width: 100%;
+    height: 150px;
+}
+
+.ava img {
+    grid-area: ava;
+    width: 150px;
+    height: 170px;
+}
+
+.description {
+    grid-area: descr;
+}
+

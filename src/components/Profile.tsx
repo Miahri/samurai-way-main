@@ -1,15 +1,21 @@
 import React from 'react';
 import '../App.css';
+import profileModule from './Profile.module.css';
 
 export function Profile() {
     return (
-        <div className='app-content'>
-            <div className='ava'>
+        <div className={profileModule.appContent}>
+            <div className={profileModule.walpapper}>
                 <img
-                    src="https://production-it-incubator.s3.eu-central-1.amazonaws.com/personal-page-front-public%3Aavatar/Image/fe6760cb-5e82-453b-a3d2-7fe1b1f70b00_photo_2023-01-02_15-52-26.jpg"/>
+                    src="https://img.freepik.com/free-vector/hand-drawn-chinese-style-illustration_23-2149716751.jpg?size=626&ext=jpg&ga=GA1.2.671649503.1673040739"/>
             </div>
-            <div>
-                ava + description
+            <div className={profileModule.profile}>
+                <div className={profileModule.ava}>
+                    <img src="https://img.freepik.com/premium-vector/illustration-concept-of-samurai-warrior_157713-245.jpg?w=2000"/>
+                </div>
+                <div className={profileModule.description}>
+                    description
+                </div>
             </div>
             <div>
                 My posts

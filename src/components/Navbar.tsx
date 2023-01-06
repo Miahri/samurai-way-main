@@ -1,8 +1,9 @@
 import React from 'react';
+import navModule from './Navbar.module.css';
 
 export function Navbar() {
     return (
-        <nav className='app-nav'>
+        <nav className={navModule.appNav}>
             <div>
                 <a>Profile</a>
             </div>
@@ -10,7 +11,7 @@ export function Navbar() {
                 <a>Messages</a>
             </div>
             <div>
-                <a>Photos</a>
+                <a>News</a>
             </div>
             <div>
                 <a>Music</a>
