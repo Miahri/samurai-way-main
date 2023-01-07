@@ -15,8 +15,8 @@ export function MyPosts() {
                 <textarea></textarea>
                 <button>Post</button>
             </div>
-            <Post message={message1}/>
-            <Post message={message2}/>
+            <Post message={message1} likes={likes1}/>
+            <Post message={message2} likes={likes2}/>
         </div>
     );
 }
