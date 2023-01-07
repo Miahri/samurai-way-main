@@ -3,10 +3,10 @@ import {Post} from './Post/Post';
 import mypostsModule from './MyPosts.module.css';
 
 export function MyPosts() {
-    let message1 = "Hi. How are you?";
-    let message2 = "It's my first post here!";
-    let likes1 = 15;
-    let likes2 = 20;
+    let message1:string = "Hi. How are you?";
+    let message2:string = "It's my first post here!";
+    let likes1:number = 15;
+    let likes2:number = 20;
 
     return (
         <div>
