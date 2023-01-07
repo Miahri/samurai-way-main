@@ -1,6 +1,6 @@
 import React from 'react';
-import '../App.css';
 import profileModule from './Profile.module.css';
+import {MyPosts} from './MyPosts/MyPosts';
 
 export function Profile() {
     return (
@@ -17,18 +17,7 @@ export function Profile() {
                     description
                 </div>
             </div>
-            <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div>
-                    Post 1
-                </div>
-                <div>
-                    Post 1
-                </div>
-            </div>
+            <MyPosts />
         </div>
     );
 }
