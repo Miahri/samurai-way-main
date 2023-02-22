@@ -1,0 +1,9 @@
+.dialItem a {
+    color: black;
+    text-decoration: none;
+}
+
+.dialItem a.activeLink {
+    color: firebrick;
+    font-weight: bolder;
+}

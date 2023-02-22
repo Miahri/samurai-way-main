@@ -1,23 +1,25 @@
 import React from 'react';
 import profileModule from './Profile.module.css';
 import {MyPosts} from './MyPosts/MyPosts';
+import {ProfileInfo} from "./ProfileInfo";
+import {ProfilePageType} from "../../redux/state";
 
-export function Profile() {
+type ProfilePropsType = {
+    profilePage: ProfilePageType
+    addPost: (message: string) => void
+}
+
+export function Profile(props: ProfilePropsType) {
     return (
-        <div className={profileModule.appContent}>
-            <div className={profileModule.walpapper}>
+        <div>
+            <div className={profileModule.wallpaper}>
                 <img
                     src="https://img.freepik.com/free-vector/hand-drawn-chinese-style-illustration_23-2149716751.jpg?size=626&ext=jpg&ga=GA1.2.671649503.1673040739"/>
             </div>
             <div className={profileModule.profile}>
-                <div className={profileModule.ava}>
-                    <img src="https://img.freepik.com/premium-vector/illustration-concept-of-samurai-warrior_157713-245.jpg?w=2000"/>
-                </div>
-                <div className={profileModule.description}>
-                    description
-                </div>
+                <ProfileInfo />
             </div>
-            <MyPosts />
+            <MyPosts posts={props.profilePage.posts} addPost={props.addPost}/>
         </div>
     );
 }

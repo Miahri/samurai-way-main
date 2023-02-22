@@ -1,12 +1,12 @@
 import React from 'react';
 import postModule from './Post.module.css';
 
-type PostType = {
+type PostPropsType = {
     message: string,
     likes: number
 }
 
-export function Post(props: PostType) {
+export function Post(props: PostPropsType) {
     return (
         <div className={postModule.ava}>
             <img
