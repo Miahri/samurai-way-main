@@ -5,7 +5,9 @@ import {PostsType} from "../../../redux/state";
 
 type MyPostPropsType = {
     posts: Array<PostsType>
+    newPostText: string
     addPost: (message: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 export function MyPosts(props: MyPostPropsType) {
@@ -16,7 +18,13 @@ export function MyPosts(props: MyPostPropsType) {
     const addPost = () => {
         if(newPostElement.current) {
             props.addPost(newPostElement.current.value);
-            newPostElement.current.value = '';
+            props.updateNewPostText('');
+        }
+    }
+
+    const updateNewPostText = () => {
+        if(newPostElement.current) {
+            props.updateNewPostText(newPostElement.current.value);
         }
     }
 
@@ -24,7 +32,7 @@ export function MyPosts(props: MyPostPropsType) {
         <div className={myPostsModule.content}>
             My posts
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea value={props.newPostText} ref={newPostElement} onChange={updateNewPostText}></textarea>
                 <button onClick={addPost}>Post</button>
             </div>
             {postItems}
