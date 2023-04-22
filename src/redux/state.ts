@@ -1,20 +1,6 @@
-export const ADD_POST = 'ADD-POST';
-export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-export const SEND_MESSAGE = 'SEND-MESSAGE';
-export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-
-export const addPostActionCreator = () => {
-    return {type: ADD_POST}
-}
-export const updateNewPostTextActionCreator = (newText: string) => {
-    return {type: UPDATE_NEW_POST_TEXT, newText: newText}
-}
-export const sendMessageActionCreator = () => {
-    return {type: SEND_MESSAGE}
-}
-export const updateNewMsgTextActionCreator = (message: string) => {
-    return {type: UPDATE_NEW_MESSAGE_TEXT, message: message}
-}
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export const store = {
     _state: {
@@ -39,7 +25,8 @@ export const store = {
                 {id: 3, message: 'Ochen kruto'}
             ],
             newMessageText: ''
-        }
+        },
+        sidebar: {}
     },
     getState() {
         return this._state
@@ -47,29 +34,15 @@ export const store = {
     _callSubscriber(state: StateType) {
         console.log('State was changed')
     },
-    subscribe(observer: any) {
+    subscribe(observer: any) {  /////////////to fix any
         this._callSubscriber = observer;
     },
-    dispatch(action: any){
-        if(action.type === ADD_POST){
-            let newPost = {
-                message: this._state.profilePage.newPostText, likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._callSubscriber(this._state);
-        } else if(action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if(action.type === SEND_MESSAGE){
-            let newMessage = {
-                id: 4, message: this._state.dialogPage.newMessageText
-            }
-            this._state.dialogPage.messages.push(newMessage);
-            this._callSubscriber(this._state);
-        } else if(action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogPage.newMessageText = action.message;
-            this._callSubscriber(this._state);
-        }
+    dispatch(action: any){  /////////////to fix any
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
     }
 }
 
