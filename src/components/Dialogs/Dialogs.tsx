@@ -36,7 +36,7 @@ export const Dialogs = (props: DialogPropsType) => {
                 {messageItems}
                 <div>
                     <textarea value={props.dialogPage.newMessageText} onChange={updateNewMsgText}></textarea>
-                    <button onClick={sendMessage}>Send</button>
+                    <button onClick={sendMessage}>Send message</button>
                 </div>
             </div>
         </div>
