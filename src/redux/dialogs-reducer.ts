@@ -1,15 +1,13 @@
-export const SEND_MESSAGE = 'SEND-MESSAGE';
-export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-export const dialogsReducer = (state: any, action: any) => {    /////////////to fix any
+export const dialogsReducer = (state: any, action: DialogPageActionsType) => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case 'SEND-MESSAGE':
             let newMessage = {
                 id: 4, message: state.newMessageText
             }
             state.messages.push(newMessage);
             return state;
-        case UPDATE_NEW_MESSAGE_TEXT:
+        case 'UPDATE-NEW-MESSAGE-TEXT':
             state.newMessageText = action.message;
             return state;
         default:
@@ -17,9 +15,19 @@ export const dialogsReducer = (state: any, action: any) => {    /////////////to 
     }
 }
 
+export type DialogPageActionsType = SendMessageActionType | UpdateNewMsgTextActionType;
+
+export type SendMessageActionType = {
+    type: 'SEND-MESSAGE'
+}
+export type UpdateNewMsgTextActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    message: string
+}
+
 export const sendMessageActionCreator = () => {
-    return {type: SEND_MESSAGE}
+    return {type: 'SEND_MESSAGE'}
 }
 export const updateNewMsgTextActionCreator = (message: string) => {
-    return {type: UPDATE_NEW_MESSAGE_TEXT, message: message}
+    return {type: 'UPDATE_NEW_MESSAGE_TEXT', message: message}
 }

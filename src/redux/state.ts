@@ -1,8 +1,21 @@
-import {profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {
+    AddPostActionType,
+    ProfilePageActionsType,
+    profileReducer,
+    UpdateNewPostTextActionType
+} from "./profile-reducer";
+import {DialogPageActionsType, dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
-export const store = {
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
+    subscribe: (observer: (state: StateType) => void) => void
+    dispatch: (action: any) => void /////to fix any
+}
+
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -32,9 +45,9 @@ export const store = {
         return this._state
     },
     _callSubscriber(state: StateType) {
-        console.log('State was changed')
+        console.log('State was changed:' + state)
     },
-    subscribe(observer: any) {  /////////////to fix any
+    subscribe(observer: (state: StateType) => void) {  /////////////to fix any
         this._callSubscriber = observer;
     },
     dispatch(action: any){  /////////////to fix any
@@ -72,7 +85,12 @@ export type DialogPageType = {
     newMessageText: string
 }
 
+export type SidebarType = {
+
+}
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
+    sidebar: SidebarType
 }
