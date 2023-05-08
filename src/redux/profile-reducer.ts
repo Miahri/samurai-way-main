@@ -14,20 +14,16 @@ export const profileReducer = (state: any, action: ProfilePageActionsType) => {
     }
 }
 
-export type ProfilePageActionsType = AddPostActionType | UpdateNewPostTextActionType;
+export type ProfilePageActionsType = AddPostActionType | UpdateNewPostTextActionType
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
-export const addPostActionCreator = (): AddPostActionType => {
-    return {type: 'ADD-POST'}
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+export const addPostActionCreator = () => {
+    return {type: 'ADD-POST'} as const
 }
 
-export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: newText}
+export const updateNewPostTextActionCreator = (newText: string) => {
+    return {type: 'UPDATE-NEW-POST-TEXT', newText: newText} as const
 }
