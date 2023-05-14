@@ -17,17 +17,12 @@ export const dialogsReducer = (state: any, action: DialogPageActionsType) => {
 
 export type DialogPageActionsType = SendMessageActionType | UpdateNewMsgTextActionType;
 
-export type SendMessageActionType = {
-    type: 'SEND-MESSAGE'
-}
-export type UpdateNewMsgTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    message: string
-}
+export type SendMessageActionType = ReturnType<typeof sendMessageActionCreator>
+export type UpdateNewMsgTextActionType = ReturnType<typeof updateNewMsgTextActionCreator>
 
 export const sendMessageActionCreator = () => {
-    return {type: 'SEND_MESSAGE'}
+    return {type: 'SEND-MESSAGE'} as const
 }
 export const updateNewMsgTextActionCreator = (message: string) => {
-    return {type: 'UPDATE_NEW_MESSAGE_TEXT', message: message}
+    return {type: 'UPDATE-NEW-MESSAGE-TEXT', message: message} as const
 }
