@@ -20,8 +20,7 @@ export function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className='appContent'>
-                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                                  dispatch={props.dispatch}/>}></Route>
+                    <Route path='/profile' render={() => <Profile store={props.store} />}></Route>
                     <Route path='/dialogs' render={() => <Dialogs dialogPage={props.state.dialogPage}
                                                                   dispatch={props.dispatch}/>}></Route>
                 </div>

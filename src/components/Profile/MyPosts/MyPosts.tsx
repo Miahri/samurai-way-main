@@ -2,12 +2,12 @@ import React from 'react';
 import {Post} from './Post/Post';
 import myPostsModule from './MyPosts.module.css';
 import {PostsType} from "../../../redux/state";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 type MyPostPropsType = {
     posts: Array<PostsType>
     newPostText: string
-    dispatch: (action: any) => void
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
 export function MyPosts(props: MyPostPropsType) {
@@ -17,14 +17,13 @@ export function MyPosts(props: MyPostPropsType) {
 
     const addPost = () => {
         if(newPostElement.current) {
-            props.dispatch(addPostActionCreator());
-            props.dispatch(updateNewPostTextActionCreator(''));
+            props.addPost()
         }
     }
 
     const updateNewPostText = () => {
         if(newPostElement.current) {
-            props.dispatch(updateNewPostTextActionCreator(newPostElement.current.value));
+            props.updateNewPostText(newPostElement.current.value)
         }
     }
 

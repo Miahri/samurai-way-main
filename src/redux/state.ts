@@ -1,10 +1,7 @@
 import {
-    AddPostActionType,
-    ProfilePageActionsType,
     profileReducer,
-    UpdateNewPostTextActionType
 } from "./profile-reducer";
-import {DialogPageActionsType, dialogsReducer} from "./dialogs-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 export type StoreType = {
@@ -39,7 +36,9 @@ export const store: StoreType = {
             ],
             newMessageText: ''
         },
-        sidebar: {}
+        sidebar: {
+            pages: ['1', '2']
+        }
     },
     getState() {
         return this._state
@@ -86,7 +85,7 @@ export type DialogPageType = {
 }
 
 export type SidebarType = {
-
+    pages: Array<string>
 }
 
 export type StateType = {
