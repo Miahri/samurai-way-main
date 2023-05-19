@@ -1,10 +1,20 @@
 import React from 'react';
-import {sendMessageActionCreator, updateNewMsgTextActionCreator} from "../../redux/dialogs-reducer";
+import {
+    DialogPageType,
+    sendMessageActionCreator,
+    updateNewMsgTextActionCreator
+} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/state";
+import {AppRootStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
-const mapStateToProps = (state: StateType) => {
+type DialogsMapDispatchToPropsType = {
+    sendMessage: () => void
+    updateNewMsgText: (text: string) => void
+}
+
+const mapStateToProps = (state: AppRootStateType): DialogPageType => {
     return {
         newMessageText: state.dialogPage.newMessageText,
         dialogs: state.dialogPage.dialogs,
@@ -12,7 +22,7 @@ const mapStateToProps = (state: StateType) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch): DialogsMapDispatchToPropsType => {
     return {
         sendMessage: () => {
             dispatch(sendMessageActionCreator());

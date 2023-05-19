@@ -1,4 +1,18 @@
-import {DialogPageType} from "./state";
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessagesType = {
+    id: number
+    message: string
+}
+
+export type DialogPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageText: string
+}
 
 let initialState: DialogPageType = {
     dialogs: [
@@ -16,7 +30,7 @@ let initialState: DialogPageType = {
     newMessageText: ''
 }
 
-export const dialogsReducer = (state = initialState, action: DialogPageActionsType) => {
+export const dialogsReducer = (state = initialState, action: DialogPageActionsType): DialogPageType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
             let newMessage = {

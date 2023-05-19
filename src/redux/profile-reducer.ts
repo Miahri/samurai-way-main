@@ -1,4 +1,12 @@
-import {ProfilePageType} from "./state";
+export type PostsType = {
+    message: string
+    likesCount: number
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
 
 let initialState: ProfilePageType = {
     posts: [
@@ -8,7 +16,7 @@ let initialState: ProfilePageType = {
     newPostText: ''
 }
 
-export const profileReducer = (state = initialState, action: ProfilePageActionsType) => {
+export const profileReducer = (state = initialState, action: ProfilePageActionsType): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {

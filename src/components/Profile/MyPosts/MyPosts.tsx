@@ -11,7 +11,7 @@ type MyPostPropsType = {
 }
 
 export function MyPosts(props: MyPostPropsType) {
-    let postItems = props.posts.map((p:any) => <Post message={p.message} likes={p.likesCount}/>)
+    let postItems = props.posts.map((p:PostsType) => <Post message={p.message} likes={p.likesCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 

@@ -1,10 +1,10 @@
 import React from "react";
 
-type messageType = {
+type MessageType = {
     message: string
 }
 
-export const Message = (props: messageType) => {
+export const Message = (props: MessageType) => {
     return(
         <div>{props.message}</div>
     )

@@ -13,8 +13,8 @@ type DialogPropsType = {
 }
 
 export const Dialogs = (props: DialogPropsType) => {
-    let dialogItems = props.dialogs.map((d: any) => <DialogItem id={d.id} name={d.name}/>)
-    let messageItems = props.messages.map((m: any) => <Message message={m.message}/>)
+    let dialogItems = props.dialogs.map((d: DialogsType) => <DialogItem id={d.id} name={d.name}/>)
+    let messageItems = props.messages.map((m: MessagesType) => <Message message={m.message}/>)
 
     const sendMessage = () => {
         props.sendMessage()

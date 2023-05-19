@@ -1,15 +1,18 @@
 import {
+    ProfilePageActionsType,
     profileReducer,
 } from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {DialogPageActionsType, dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+
+type ActionRootType = ProfilePageActionsType & DialogPageActionsType
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
-    dispatch: (action: any) => void /////to fix any
+    dispatch: (action: ActionRootType) => void
 }
 
 export const store: StoreType = {
@@ -46,10 +49,10 @@ export const store: StoreType = {
     _callSubscriber(state: StateType) {
         console.log('State was changed:' + state)
     },
-    subscribe(observer: (state: StateType) => void) {  /////////////to fix any
+    subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer;
     },
-    dispatch(action: any){  /////////////to fix any
+    dispatch(action: ActionRootType) {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
@@ -63,6 +66,11 @@ export type PostsType = {
     likesCount: number
 }
 
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+
 export type DialogsType = {
     id: number
     name: string
@@ -71,11 +79,6 @@ export type DialogsType = {
 export type MessagesType = {
     id: number
     message: string
-}
-
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
 }
 
 export type DialogPageType = {
