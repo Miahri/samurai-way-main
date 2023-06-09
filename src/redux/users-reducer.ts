@@ -3,13 +3,17 @@ type LocationType = {
     country: string
 }
 
+type PhotosType = {
+    small: string
+    large: string
+}
+
 export type UserType = {
     id: string
-    photoURL: string
+    photos: PhotosType
     followed: boolean
-    fullname: string
-    note: string
-    location: LocationType
+    name: string
+    status: string
 }
 
 export type UserPageType = {
@@ -37,7 +41,7 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
         case 'SET-USERS': {
             return {
                 ...state,
-                users: {...state.users, ...action.users}
+                users: [...state.users, ...action.users]
             }
         }
         default:

@@ -20,6 +20,9 @@ export function Navbar() {
             <div className={navModule.item}>
                 <NavLink to={'/settings'} activeClassName={navModule.activeLink}>Settings</NavLink>
             </div>
+            <div className={navModule.item}>
+                <NavLink to={'/users'} activeClassName={navModule.activeLink}>Users</NavLink>
+            </div>
         </nav>
     );
 }
