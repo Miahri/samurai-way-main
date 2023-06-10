@@ -5,15 +5,21 @@ import axios from "axios";
 
 type UsersPropsType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     follow: (userID: string) => void
     unfollow: (userID: string) => void
     setUsers: (users: UserType[]) => void
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (count: number) => void
 }
 
 export function Users(props: UsersPropsType) {
     if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`).then(res => {
             props.setUsers(res.data.items);
+            props.setTotalUsersCount(res.data.totalCount);
         })
 
         /*props.setUsers([
@@ -26,9 +32,32 @@ export function Users(props: UsersPropsType) {
         ])*/
     }
 
-    const photoURL = 'https://im.haberturk.com/l/2019/10/31/ver1572526744/2536158/jpg/640x360'
+    const photoURL = 'https://im.haberturk.com/l/2019/10/31/ver1572526744/2536158/jpg/640x360';
+
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    
+    let pages: Array<number> = []
+    for(let i = 1; i < pagesCount; i++){
+        pages.push(i);
+    }
+
+    const setPage = (pageNumber: number) => {
+        props.setCurrentPage(pageNumber);
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`).then(res => {
+            props.setUsers(res.data.items);
+        })
+    }
 
     return <div>
+        <div>
+            { pages.map(p => {
+                return <span className={props.currentPage === p ? styles.selectedPage : ''}
+                             onClick={() => setPage(p)}>
+                    {p}
+                </span>
+            })}
+        </div>
         {props.users.map(u => <div key={u.id}>
             <span>
                 <div>
