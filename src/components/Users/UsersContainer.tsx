@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-    followActionCreator, setCurrentPageActionCreator,
+    followActionCreator, setCurrentPageActionCreator, setFetchingActionCreator,
     setUserActionCreator, setUsersCountActionCreator,
     unfollowActionCreator,
     UserPageType,
@@ -17,6 +17,7 @@ type UsersMapDispatchToPropsType = {
     setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (count: number) => void
+    setFetching: (isFetching: boolean) => void
 }
 
 const mapStateToProps = (state: AppRootStateType): UserPageType => {
@@ -24,7 +25,8 @@ const mapStateToProps = (state: AppRootStateType): UserPageType => {
         users: state.userPage.users,
         pageSize: state.userPage.pageSize,
         totalUsersCount: state.userPage.totalUsersCount,
-        currenPage: state.userPage.currenPage
+        currentPage: state.userPage.currentPage,
+        isFetching: state.userPage.isFetching
     }
 }
 
@@ -44,6 +46,9 @@ const mapDispatchToProps = (dispatch: Dispatch): UsersMapDispatchToPropsType => 
         },
         setTotalUsersCount: (count: number) => {
             dispatch(setUsersCountActionCreator(count))
+        },
+        setFetching: (isFetching: boolean) => {
+            dispatch(setFetchingActionCreator(isFetching))
         }
     }
 }

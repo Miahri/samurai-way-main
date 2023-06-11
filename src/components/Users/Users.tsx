@@ -1,25 +1,30 @@
 import React from 'react';
-import {UserType} from "../../redux/users-reducer";
+import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
-import axios from "axios";
+import axios from 'axios';
+import preloader from '../../assets/images/preloader.gif'
 
 type UsersPropsType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
     follow: (userID: string) => void
     unfollow: (userID: string) => void
     setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (count: number) => void
+    setFetching: (isFetching: boolean) => void
 }
 
 export function Users(props: UsersPropsType) {
     if (props.users.length === 0) {
+        props.setFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`).then(res => {
             props.setUsers(res.data.items);
             props.setTotalUsersCount(res.data.totalCount);
+            props.setFetching(false);
         })
 
         /*props.setUsers([
@@ -50,6 +55,9 @@ export function Users(props: UsersPropsType) {
     }
 
     return <div>
+        {props.isFetching ? <div>
+            <img src={preloader}/>
+        </div> : null}
         <div>
             { pages.map(p => {
                 return <span className={props.currentPage === p ? styles.selectedPage : ''}

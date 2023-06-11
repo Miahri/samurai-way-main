@@ -20,14 +20,16 @@ export type UserPageType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
-    currenPage: number
+    currentPage: number
+    isFetching: boolean
 }
 
 let initialState: UserPageType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currenPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state = initialState, action: UserPageActionsType): UserPageType => {
@@ -53,7 +55,7 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
         case 'SET-CURRENT-PAGE': {
             return {
                 ...state,
-                currenPage: action.currenPage
+                currentPage: action.currentPage
             }
         }
         case 'SET-USERS-COUNT': {
@@ -62,13 +64,19 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
                 totalUsersCount: action.totalUsersCount
             }
         }
+        case 'SET-FETCHING': {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
         default:
             return state;
     }
 }
 
 export type UserPageActionsType = FollowActionType | UnfollowActionType | SetUserActionType
-    | setCurrentPageActionType | setUsersCountActionType
+    | setCurrentPageActionType | setUsersCountActionType | setFetchingActionType
 
 export type FollowActionType = ReturnType<typeof followActionCreator>
 
@@ -79,6 +87,8 @@ export type SetUserActionType = ReturnType<typeof setUserActionCreator>
 export type setCurrentPageActionType = ReturnType<typeof setCurrentPageActionCreator>
 
 export type setUsersCountActionType = ReturnType<typeof setUsersCountActionCreator>
+
+export type setFetchingActionType = ReturnType<typeof setFetchingActionCreator>
 
 export const followActionCreator = (userID: string) => {
     return {type: 'FOLLOW', userID: userID} as const
@@ -92,10 +102,13 @@ export const setUserActionCreator = (users: Array<UserType>) => {
     return {type: 'SET-USERS', users: users} as const
 }
 
-export const setCurrentPageActionCreator = (currenPage: number) => {
-    return {type: 'SET-CURRENT-PAGE', currenPage} as const
+export const setCurrentPageActionCreator = (currentPage: number) => {
+    return {type: 'SET-CURRENT-PAGE', currentPage} as const
 }
 
 export const setUsersCountActionCreator = (totalUsersCount: number) => {
     return {type: 'SET-USERS-COUNT', totalUsersCount} as const
+}
+export const setFetchingActionCreator = (isFetching: boolean) => {
+    return {type: 'SET-FETCHING', isFetching} as const
 }
