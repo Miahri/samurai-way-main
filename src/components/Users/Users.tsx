@@ -2,7 +2,7 @@ import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import axios from 'axios';
-import preloader from '../../assets/images/preloader.gif'
+import {Preloader} from "../Preloader/Preloader";
 
 type UsersPropsType = {
     users: UserType[]
@@ -55,9 +55,7 @@ export function Users(props: UsersPropsType) {
     }
 
     return <div>
-        {props.isFetching ? <div>
-            <img src={preloader}/>
-        </div> : null}
+        {props.isFetching ? <Preloader /> : null}
         <div>
             { pages.map(p => {
                 return <span className={props.currentPage === p ? styles.selectedPage : ''}
