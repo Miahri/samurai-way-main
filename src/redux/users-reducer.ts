@@ -78,37 +78,37 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
 export type UserPageActionsType = FollowActionType | UnfollowActionType | SetUserActionType
     | setCurrentPageActionType | setUsersCountActionType | setFetchingActionType
 
-export type FollowActionType = ReturnType<typeof followActionCreator>
+export type FollowActionType = ReturnType<typeof follow>
 
-export type UnfollowActionType = ReturnType<typeof unfollowActionCreator>
+export type UnfollowActionType = ReturnType<typeof unfollow>
 
-export type SetUserActionType = ReturnType<typeof setUserActionCreator>
+export type SetUserActionType = ReturnType<typeof setUser>
 
-export type setCurrentPageActionType = ReturnType<typeof setCurrentPageActionCreator>
+export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
 
-export type setUsersCountActionType = ReturnType<typeof setUsersCountActionCreator>
+export type setUsersCountActionType = ReturnType<typeof setUsersCount>
 
-export type setFetchingActionType = ReturnType<typeof setFetchingActionCreator>
+export type setFetchingActionType = ReturnType<typeof setFetching>
 
-export const followActionCreator = (userID: string) => {
+export const follow = (userID: string) => {
     return {type: 'FOLLOW', userID: userID} as const
 }
 
-export const unfollowActionCreator = (userID: string) => {
+export const unfollow = (userID: string) => {
     return {type: 'UNFOLLOW', userID: userID} as const
 }
 
-export const setUserActionCreator = (users: Array<UserType>) => {
+export const setUser = (users: Array<UserType>) => {
     return {type: 'SET-USERS', users: users} as const
 }
 
-export const setCurrentPageActionCreator = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {type: 'SET-CURRENT-PAGE', currentPage} as const
 }
 
-export const setUsersCountActionCreator = (totalUsersCount: number) => {
+export const setUsersCount = (totalUsersCount: number) => {
     return {type: 'SET-USERS-COUNT', totalUsersCount} as const
 }
-export const setFetchingActionCreator = (isFetching: boolean) => {
+export const setFetching = (isFetching: boolean) => {
     return {type: 'SET-FETCHING', isFetching} as const
 }
