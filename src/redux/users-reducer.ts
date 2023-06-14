@@ -82,7 +82,7 @@ export type FollowActionType = ReturnType<typeof follow>
 
 export type UnfollowActionType = ReturnType<typeof unfollow>
 
-export type SetUserActionType = ReturnType<typeof setUser>
+export type SetUserActionType = ReturnType<typeof setUsers>
 
 export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
 
@@ -98,7 +98,7 @@ export const unfollow = (userID: string) => {
     return {type: 'UNFOLLOW', userID: userID} as const
 }
 
-export const setUser = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {type: 'SET-USERS', users: users} as const
 }
 
