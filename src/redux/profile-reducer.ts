@@ -1,3 +1,5 @@
+import {UserType} from "./users-reducer";
+
 export type PostsType = {
     message: string
     likesCount: number
@@ -6,7 +8,7 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-    profile: null
+    profile: UserType
 }
 
 let initialState: ProfilePageType = {
@@ -15,7 +17,16 @@ let initialState: ProfilePageType = {
         {message: "It's my first post here!", likesCount: 20}
     ],
     newPostText: '',
-    profile: null
+    profile: {
+        name: "Hacker",
+        id: '2',
+        photos: {
+            small: '',
+            large: ''
+        },
+        status: '',
+        followed: false
+    }
 }
 
 export const profileReducer = (state = initialState, action: ProfilePageActionsType): ProfilePageType => {

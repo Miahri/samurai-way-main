@@ -2,8 +2,13 @@ import React from 'react';
 import profileModule from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {UserType} from "../../redux/users-reducer";
 
-export function Profile(props: any) {
+type ProfilePropsType = {
+    profile: UserType
+}
+
+export function Profile(props: ProfilePropsType) {
     return (
         <div>
             <div className={profileModule.wallpaper}>
