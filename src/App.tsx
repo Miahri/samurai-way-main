@@ -15,7 +15,7 @@ export function App() {
                 <Header/>
                 <Navbar/>
                 <div className='appContent'>
-                    <Route path='/profile' render={() => <ProfileContainer />}></Route>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer />}></Route>
                     <Route path='/dialogs' render={() => <DialogsContainer />}></Route>
                     <Route path='/users' render={() => <UsersContainer />}></Route>
                 </div>
