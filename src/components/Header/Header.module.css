@@ -7,3 +7,11 @@
     width: 50px;
     padding: 10px;
 }
+
+.authLink {
+    float: right
+}
+
+.authLink a {
+    color: white;
+}

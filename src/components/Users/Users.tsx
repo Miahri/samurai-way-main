@@ -18,6 +18,7 @@ export function Users(props: UsersPropsType) {
     //const photoURL = 'https://im.haberturk.com/l/2019/10/31/ver1572526744/2536158/jpg/640x360';
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    console.log(props.totalUsersCount);
     
     let pages: Array<number> = []
     for(let i = 1; i < pagesCount; i++){

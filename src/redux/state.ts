@@ -4,6 +4,7 @@ import {
 } from "./profile-reducer";
 import {DialogPageActionsType, dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import {UserType} from "./users-reducer";
 
 type ActionRootType = ProfilePageActionsType & DialogPageActionsType
 
@@ -22,7 +23,17 @@ export const store: StoreType = {
                 {message: "Hi. How are you?", likesCount: 15},
                 {message: "It's my first post here!", likesCount: 20}
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: {
+                name: "Hacker",
+                id: '2',
+                photos: {
+                    small: '',
+                    large: ''
+                },
+                status: '',
+                followed: false
+            }
         },
         dialogPage: {
             dialogs: [
@@ -69,6 +80,7 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: UserType
 }
 
 export type DialogsType = {

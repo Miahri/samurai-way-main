@@ -4,6 +4,7 @@ import {Preloader} from "../Preloader/Preloader";
 import {UserType} from "../../redux/users-reducer";
 
 type ProfileInfoPropsType = {
+    children?: React.ReactNode
     profile: UserType
 }
 

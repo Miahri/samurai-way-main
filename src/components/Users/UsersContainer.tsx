@@ -14,7 +14,7 @@ type UsersMapDispatchToPropsType = {
     follow: (userID: string) => void
     unfollow: (userID: string) => void
     setUsers: (users: UserType[]) => void
-    setCurrentPage: (currentPage: number) => void
+    setCurrentPage: (pageNumber: number) => void
     setUsersCount: (count: number) => void
     setFetching: (isFetching: boolean) => void
 }
@@ -35,18 +35,20 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.setFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+            debugger
             this.props.setUsers(res.data.items);
             this.props.setUsersCount(res.data.totalCount);
             this.props.setFetching(false);
         })
     }
 
-    onPageChange(pageNumber: number) {
+    onPageChange = (pageNumber: number) => {
+        debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(res => {
+                this.props.setUsers(res.data.items);
+            })
         this.props.setCurrentPage(pageNumber);
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(res => {
-            this.props.setUsers(res.data.items);
-        })
     }
 
     render() {
