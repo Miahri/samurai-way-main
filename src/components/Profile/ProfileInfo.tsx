@@ -1,12 +1,13 @@
 import profileModule from "./Profile.module.css";
 import React from "react";
 import {Preloader} from "../Preloader/Preloader";
-import {UserType} from "../../redux/users-reducer";
+import {ProfileType} from "../../redux/profile-reducer";
 
 type ProfileInfoPropsType = {
     children?: React.ReactNode
-    profile: UserType
+    profile: ProfileType
 }
+
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
     if(!props.profile) {

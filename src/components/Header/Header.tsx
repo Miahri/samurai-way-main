@@ -3,7 +3,8 @@ import headerModule from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
 type HeaderPropsType = {
-    children?: React.ReactNode
+    isAuth: boolean
+    login: string | null
 }
 
 export function Header(props: HeaderPropsType) {
@@ -13,7 +14,7 @@ export function Header(props: HeaderPropsType) {
                 ava + description"/>
 
             <div className={headerModule.authLink}>
-                <NavLink to={'/login'}>Login</NavLink>
+                { props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink> }
             </div>
         </header>
     );

@@ -1,14 +1,34 @@
-import {UserType} from "./users-reducer";
-
 export type PostsType = {
     message: string
     likesCount: number
 }
 
+export type ProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        website: string | null,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string | null,
+        github: string,
+        mainLink: string | null
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
+} | null
+
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-    profile: UserType
+    profile: ProfileType
 }
 
 let initialState: ProfilePageType = {
@@ -17,16 +37,7 @@ let initialState: ProfilePageType = {
         {message: "It's my first post here!", likesCount: 20}
     ],
     newPostText: '',
-    profile: {
-        name: "Hacker",
-        id: '2',
-        photos: {
-            small: '',
-            large: ''
-        },
-        status: '',
-        followed: false
-    }
+    profile: null
 }
 
 export const profileReducer = (state = initialState, action: ProfilePageActionsType): ProfilePageType => {
@@ -74,6 +85,6 @@ export const updateNewPostTextActionCreator = (newText: string) => {
     return {type: 'UPDATE-NEW-POST-TEXT', newText: newText} as const
 }
 
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {type: 'SET-USER-PROFILE', profile: profile} as const
 }

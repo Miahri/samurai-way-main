@@ -2,10 +2,10 @@ import React from 'react';
 import profileModule from './Profile.module.css';
 import {ProfileInfo} from "./ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {UserType} from "../../redux/users-reducer";
+import {ProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
-    profile: UserType
+    profile: ProfileType
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -17,6 +17,7 @@ export function Profile(props: ProfilePropsType) {
                     src="https://img.freepik.com/free-vector/hand-drawn-chinese-style-illustration_23-2149716751.jpg?size=626&ext=jpg&ga=GA1.2.671649503.1673040739"/>
             </div>
             <div className={profileModule.profile}>
+
                 <ProfileInfo profile={props.profile}/>
             </div>
             <MyPostsContainer />
