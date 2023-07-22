@@ -34,8 +34,9 @@ const mapStateToProps = (state: AppRootStateType): UserPageType => {
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.setFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
-            debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(res => {
             this.props.setUsers(res.data.items);
             this.props.setUsersCount(res.data.totalCount);
             this.props.setFetching(false);
@@ -44,7 +45,9 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     onPageChange = (pageNumber: number) => {
         debugger
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(res => {
                 this.props.setUsers(res.data.items);
             })
