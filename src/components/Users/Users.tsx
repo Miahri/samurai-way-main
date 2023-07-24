@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserType} from '../../redux/users-reducer';
+import {setFollowingInProgress, UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import profile_photo from '../../assets/images/profile_photo.jpg'
 import {NavLink} from "react-router-dom";
@@ -10,9 +10,11 @@ type UsersPropsType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    followingInProgress: Array<any>
     follow: (userID: string) => void
     unfollow: (userID: string) => void
     onPageChange: (page: number) => void
+    setFollowingInProgress: (isFetching: boolean, userID: string) => void
 }
 
 export function Users(props: UsersPropsType) {
@@ -45,7 +47,8 @@ export function Users(props: UsersPropsType) {
                 </div>
                 <div>
                     {u.followed
-                        ? <button onClick={() => {
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.setFollowingInProgress(true, u.id);
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                 withCredentials: true,
                                 headers: {
@@ -55,9 +58,11 @@ export function Users(props: UsersPropsType) {
                                 if(res.data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
+                                props.setFollowingInProgress(false, u.id);
                             })
                         }}>Unfollow</button>
-                        : <button onClick={() => {
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.setFollowingInProgress(true, u.id);
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
                                 withCredentials: true,
                                 headers: {
@@ -67,6 +72,7 @@ export function Users(props: UsersPropsType) {
                                 if(res.data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
+                                props.setFollowingInProgress(false, u.id);
                             })
                         }}>Follow</button>
                     }

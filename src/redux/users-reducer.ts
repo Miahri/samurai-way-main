@@ -22,6 +22,7 @@ export type UserPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<any>
 }
 
 let initialState: UserPageType = {
@@ -29,7 +30,8 @@ let initialState: UserPageType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 export const usersReducer = (state = initialState, action: UserPageActionsType): UserPageType => {
@@ -70,13 +72,21 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
                 isFetching: action.isFetching
             }
         }
+        case 'SET-FOLLOWING-IN-PROGRESS': {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userID]
+                    : state.followingInProgress.filter(id => id != action.userID)
+            }
+        }
         default:
             return state;
     }
 }
 
 export type UserPageActionsType = FollowActionType | UnfollowActionType | SetUserActionType
-    | setCurrentPageActionType | setUsersCountActionType | setFetchingActionType
+    | setCurrentPageActionType | setUsersCountActionType | setFetchingActionType | setFollowingActionType;
 
 export type FollowActionType = ReturnType<typeof follow>
 
@@ -89,6 +99,8 @@ export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
 export type setUsersCountActionType = ReturnType<typeof setUsersCount>
 
 export type setFetchingActionType = ReturnType<typeof setFetching>
+
+export type setFollowingActionType = ReturnType<typeof setFollowingInProgress>
 
 export const follow = (userID: string) => {
     return {type: 'FOLLOW', userID: userID} as const
@@ -111,4 +123,8 @@ export const setUsersCount = (totalUsersCount: number) => {
 }
 export const setFetching = (isFetching: boolean) => {
     return {type: 'SET-FETCHING', isFetching} as const
+}
+
+export const setFollowingInProgress = (isFetching: boolean, userID: string) => {
+    return {type: 'SET-FOLLOWING-IN-PROGRESS', isFetching, userID} as const
 }

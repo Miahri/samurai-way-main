@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
     follow,
-    setCurrentPage, setFetching, setUsers, setUsersCount, unfollow,
+    setCurrentPage, setFetching, setFollowingInProgress, setUsers, setUsersCount, unfollow,
     UserPageType, UserType,
 } from "../../redux/users-reducer";
 import {Preloader} from "../Preloader/Preloader";
@@ -17,6 +17,7 @@ type UsersMapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setUsersCount: (count: number) => void
     setFetching: (isFetching: boolean) => void
+    setFollowingInProgress: (isFetching: boolean, userID: string) => void
 }
 
 export type UsersContainerPropsType = UserPageType & UsersMapDispatchToPropsType;
@@ -27,7 +28,8 @@ const mapStateToProps = (state: AppRootStateType): UserPageType => {
         pageSize: state.userPage.pageSize,
         totalUsersCount: state.userPage.totalUsersCount,
         currentPage: state.userPage.currentPage,
-        isFetching: state.userPage.isFetching
+        isFetching: state.userPage.isFetching,
+        followingInProgress: state.userPage.followingInProgress
     }
 }
 
@@ -59,11 +61,13 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                        currentPage={this.props.currentPage}
                        follow={this.props.follow}
                        unfollow={this.props.unfollow}
-                       onPageChange={this.onPageChange} />
+                       onPageChange={this.onPageChange}
+                       setFollowingInProgress={this.props.setFollowingInProgress}
+                       followingInProgress={this.props.followingInProgress} />
             </>
         )
     }}
 
 export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage,
-    setUsersCount, setFetching})(UsersContainer)
+    setUsersCount, setFetching, setFollowingInProgress})(UsersContainer)
 
