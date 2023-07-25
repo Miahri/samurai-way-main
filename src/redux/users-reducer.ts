@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
+
 type LocationType = {
     city: string
     country: string
@@ -127,4 +130,15 @@ export const setFetching = (isFetching: boolean) => {
 
 export const setFollowingInProgress = (isFetching: boolean, userID: string) => {
     return {type: 'SET-FOLLOWING-IN-PROGRESS', isFetching, userID} as const
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFetching(true));
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setUsers(data.items));
+            dispatch(setUsersCount(data.totalCount));
+            dispatch(setFetching(false));
+        })
+    }
 }

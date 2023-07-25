@@ -1,5 +1,5 @@
 import React from 'react';
-import {setFollowingInProgress, UserType} from '../../redux/users-reducer';
+import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import profile_photo from '../../assets/images/profile_photo.jpg'
 import {NavLink} from "react-router-dom";

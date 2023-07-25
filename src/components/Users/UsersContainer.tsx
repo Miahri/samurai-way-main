@@ -2,22 +2,19 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-    follow,
-    setCurrentPage, setFetching, setFollowingInProgress, setUsers, setUsersCount, unfollow,
-    UserPageType, UserType,
+    follow, getUsersThunkCreator,
+    setCurrentPage, setFollowingInProgress, unfollow,
+    UserPageType,
 } from "../../redux/users-reducer";
 import {Preloader} from "../Preloader/Preloader";
 import {Users} from "./Users";
-import {userAPI} from "../../api/api";
 
 type UsersMapDispatchToPropsType = {
     follow: (userID: string) => void
     unfollow: (userID: string) => void
-    setUsers: (users: UserType[]) => void
     setCurrentPage: (pageNumber: number) => void
-    setUsersCount: (count: number) => void
-    setFetching: (isFetching: boolean) => void
     setFollowingInProgress: (isFetching: boolean, userID: string) => void
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
 }
 
 export type UsersContainerPropsType = UserPageType & UsersMapDispatchToPropsType;
@@ -35,19 +32,11 @@ const mapStateToProps = (state: AppRootStateType): UserPageType => {
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.setFetching(true);
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setUsersCount(data.totalCount);
-            this.props.setFetching(false);
-        })
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChange = (pageNumber: number) => {
-        debugger
-        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items);
-            })
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
         this.props.setCurrentPage(pageNumber);
     }
 
@@ -68,6 +57,6 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
         )
     }}
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage,
-    setUsersCount, setFetching, setFollowingInProgress})(UsersContainer)
+export default connect(mapStateToProps, {follow, unfollow, setCurrentPage,
+    setFollowingInProgress, getUsersThunkCreator})(UsersContainer)
 
