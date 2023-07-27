@@ -3,11 +3,13 @@ import dialogsModule from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../redux/state";
+import {Redirect} from "react-router-dom";
 
 type DialogPropsType = {
     newMessageText: string
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    isAuth: boolean
     sendMessage: () => void
     updateNewMsgText: (text: string) => void
 }
