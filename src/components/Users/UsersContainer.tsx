@@ -57,6 +57,12 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
         )
     }}
 
+/*export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage,
+    setFollowingInProgress, getUsersThunkCreator}),
+)(UsersContainer)*/
+
 export default connect(mapStateToProps, {follow, unfollow, setCurrentPage,
     setFollowingInProgress, getUsersThunkCreator})(UsersContainer)
 
