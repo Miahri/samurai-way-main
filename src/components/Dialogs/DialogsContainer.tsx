@@ -40,6 +40,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DialogsMapDispatchToPropsType =
     withAuthRedirect
 )(Dialogs)*/
 
+
+//need to delete
 //let AuthRedirectComponent = withAuthRedirect(Dialogs);
 
 let AuthRedirectComponent = (props: any) => {

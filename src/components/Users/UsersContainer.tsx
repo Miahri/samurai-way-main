@@ -63,6 +63,8 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     setFollowingInProgress, getUsersThunkCreator}),
 )(UsersContainer)*/
 
+
+//need to delete
 export default connect(mapStateToProps, {follow, unfollow, setCurrentPage,
     setFollowingInProgress, getUsersThunkCreator})(UsersContainer)
 

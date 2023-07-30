@@ -142,3 +142,4 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
         })
     }
 }
+
