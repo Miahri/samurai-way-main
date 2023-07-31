@@ -2,6 +2,7 @@ import profileModule from "./Profile.module.css";
 import React from "react";
 import {Preloader} from "../Preloader/Preloader";
 import {ProfileType} from "../../redux/profile-reducer";
+import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     children?: React.ReactNode
@@ -22,7 +23,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <img src={props.profile.photos.large}/>
             </div>
             <div className={profileModule.description}>
-                description
+                <ProfileStatus status={props.profile.aboutMe} />
             </div>
         </div>
     )
