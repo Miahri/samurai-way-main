@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 export type PostsType = {
     message: string
@@ -94,7 +94,7 @@ export const setUserProfile = (profile: ProfileType) => {
 
 export const getUserProfileThunkCreator = (userId: string) => {
     return (dispatch: Dispatch) => {
-        userAPI.getUserProfile(userId).then(res => {
+        profileAPI.getUserProfile(userId).then(res => {
             dispatch(setUserProfile(res.data));
         })
     }
