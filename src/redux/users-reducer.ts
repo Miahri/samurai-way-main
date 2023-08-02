@@ -80,7 +80,7 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userID]
-                    : state.followingInProgress.filter(id => id != action.userID)
+                    : state.followingInProgress.filter(id => id !== action.userID)
             }
         }
         default:
@@ -139,6 +139,30 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
             dispatch(setUsers(data.items));
             dispatch(setUsersCount(data.totalCount));
             dispatch(setFetching(false));
+        })
+    }
+}
+
+export const unfollowTC = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(true, userId));
+        userAPI.unfollow(userId).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(unfollow(userId))
+            }
+            dispatch(setFollowingInProgress(false, userId));
+        })
+    }
+}
+
+export const followTC = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setFollowingInProgress(true, userId));
+        userAPI.follow(userId).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(follow(userId))
+            }
+            dispatch(setFollowingInProgress(false, userId));
         })
     }
 }

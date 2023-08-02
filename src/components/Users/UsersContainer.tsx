@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
-    follow, getUsersThunkCreator,
-    setCurrentPage, setFollowingInProgress, unfollow,
+    followTC, getUsersThunkCreator,
+    setCurrentPage, setFollowingInProgress, unfollowTC,
     UserPageType,
 } from "../../redux/users-reducer";
 import {Preloader} from "../Preloader/Preloader";
 import {Users} from "./Users";
 
 type UsersMapDispatchToPropsType = {
-    follow: (userID: string) => void
-    unfollow: (userID: string) => void
+    followTC: (userID: string) => void
+    unfollowTC: (userID: string) => void
     setCurrentPage: (pageNumber: number) => void
     setFollowingInProgress: (isFetching: boolean, userID: string) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
@@ -48,8 +48,8 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                        pageSize={this.props.pageSize}
                        totalUsersCount={this.props.totalUsersCount}
                        currentPage={this.props.currentPage}
-                       follow={this.props.follow}
-                       unfollow={this.props.unfollow}
+                       followTC={this.props.followTC}
+                       unfollowTC={this.props.unfollowTC}
                        onPageChange={this.onPageChange}
                        setFollowingInProgress={this.props.setFollowingInProgress}
                        followingInProgress={this.props.followingInProgress} />
@@ -65,6 +65,6 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
 
 //need to delete
-export default connect(mapStateToProps, {follow, unfollow, setCurrentPage,
+export default connect(mapStateToProps, {followTC, unfollowTC, setCurrentPage,
     setFollowingInProgress, getUsersThunkCreator})(UsersContainer)
 

@@ -18,14 +18,14 @@ export type ProfileType = {
         github: string,
         mainLink: string | null
     },
+    fullName: string,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
-    fullName: string,
-    userId: number,
     photos: {
         small: string,
         large: string
-    }
+    },
+    userId: number
 } | null
 
 export type ProfilePageType = {
@@ -93,6 +93,7 @@ export const setUserProfile = (profile: ProfileType) => {
 }
 
 export const getUserProfileThunkCreator = (userId: string) => {
+    debugger
     return (dispatch: Dispatch) => {
         profileAPI.getUserProfile(userId).then(res => {
             dispatch(setUserProfile(res.data));
