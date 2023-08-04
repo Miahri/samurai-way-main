@@ -6,6 +6,8 @@ import {ProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -18,7 +20,9 @@ export function Profile(props: ProfilePropsType) {
             </div>
             <div className={profileModule.profile}>
 
-                <ProfileInfo profile={props.profile}/>
+                <ProfileInfo profile={props.profile}
+                             status={props.status}
+                             updateStatus={props.updateStatus}/>
             </div>
             <MyPostsContainer />
         </div>
