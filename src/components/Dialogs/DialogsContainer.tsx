@@ -5,7 +5,7 @@ import {
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {compose, Dispatch} from "redux";
+import {Dispatch} from "redux";
 import {Redirect} from "react-router-dom";
 
 type DialogsMapDispatchToPropsType = {
