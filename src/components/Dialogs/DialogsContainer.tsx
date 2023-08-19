@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     sendMessageActionCreator,
-    updateNewMsgTextActionCreator
 } from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -10,13 +9,11 @@ import {compose, Dispatch} from "redux";
 import {Redirect} from "react-router-dom";
 
 type DialogsMapDispatchToPropsType = {
-    sendMessage: () => void
-    updateNewMsgText: (text: string) => void
+    sendMessage: (newMessageBody: string) => void
 }
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        newMessageText: state.dialogPage.newMessageText,
         dialogs: state.dialogPage.dialogs,
         messages: state.dialogPage.messages,
         isAuth: state.authPage.isAuth
@@ -25,12 +22,8 @@ const mapStateToProps = (state: AppRootStateType) => {
 
 const mapDispatchToProps = (dispatch: Dispatch): DialogsMapDispatchToPropsType => {
     return {
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator());
-            dispatch(updateNewMsgTextActionCreator(''));
-        },
-        updateNewMsgText: (text: string) => {
-            dispatch(updateNewMsgTextActionCreator(text));
+        sendMessage: (newMessageBody: string) => {
+            dispatch(sendMessageActionCreator(newMessageBody));
         }
     }
 }
