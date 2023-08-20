@@ -30,7 +30,6 @@ export type ProfileType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: ProfileType
     status: string
 }
@@ -40,7 +39,6 @@ let initialState: ProfilePageType = {
         {message: "Hi. How are you?", likesCount: 15},
         {message: "It's my first post here!", likesCount: 20}
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -49,18 +47,11 @@ export const profileReducer = (state = initialState, action: ProfilePageActionsT
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {
-                message: state.newPostText, likesCount: 0
+                message: action.newPostText, likesCount: 0
             }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return {
-                ...state,
-                newPostText: action.newText
+                posts: [...state.posts, newPost]
             }
         }
         case 'SET-USER-PROFILE': {
@@ -80,19 +71,17 @@ export const profileReducer = (state = initialState, action: ProfilePageActionsT
     }
 }
 
-export type ProfilePageActionsType = AddPostActionType | UpdateNewPostTextActionType
+export type ProfilePageActionsType = AddPostActionType
     | SetUserProfileActionType | SetStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export type SetStatusActionType = ReturnType<typeof setStatus>
 
-export const addPostActionCreator = () => {
-    return {type: 'ADD-POST'} as const
+export const addPostActionCreator = (newPostText: string) => {
+    return {type: 'ADD-POST', newPostText} as const
 }
 
 export const updateNewPostTextActionCreator = (newText: string) => {
