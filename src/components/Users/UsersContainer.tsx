@@ -6,7 +6,7 @@ import {
     setCurrentPage, setFollowingInProgress, unfollowTC,
     UserPageType,
 } from "../../redux/users-reducer";
-import {Preloader} from "../Preloader/Preloader";
+import {Preloader} from "../../common/Preloader/Preloader";
 import {Users} from "./Users";
 
 type UsersMapDispatchToPropsType = {
