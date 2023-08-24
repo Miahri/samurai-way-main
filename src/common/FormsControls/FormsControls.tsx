@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 
-const Textarea: FC<any> = ({input, meta, ...props}) => {
+export const Textarea: FC<any> = ({input, meta, ...props}) => {
   const hasError = meta.touched && meta.error;
 
   return (
