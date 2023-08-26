@@ -12,3 +12,16 @@ export const Textarea: FC<any> = ({input, meta, ...props}) => {
     </div>
   )
 }
+
+export const Input: FC<any> = ({input, meta, ...props}) => {
+  const hasError = meta.touched && meta.error;
+
+  return (
+    <div>
+      <div>
+        <input {...input} {...props} />
+      </div>
+      {hasError && <span>{meta.error}</span>}
+    </div>
+  )
+}
