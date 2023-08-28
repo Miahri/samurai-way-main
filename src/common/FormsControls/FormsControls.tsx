@@ -1,27 +1,26 @@
 import React, {FC} from 'react';
 
-export const Textarea: FC<any> = ({input, meta, ...props}) => {
+export const FormControlComp: FC<any> = ({input, meta, child, ...props}) => {
   const hasError = meta.touched && meta.error;
 
   return (
     <div>
       <div>
-        <textarea {...input} {...props} />
+        {props.children}
       </div>
       {hasError && <span>{meta.error}</span>}
     </div>
   )
 }
 
-export const Input: FC<any> = ({input, meta, ...props}) => {
-  const hasError = meta.touched && meta.error;
+export const Textarea: FC<any> = (props) => {
+  const {input, meta, child, ...restProps} = props;
 
-  return (
-    <div>
-      <div>
-        <input {...input} {...props} />
-      </div>
-      {hasError && <span>{meta.error}</span>}
-    </div>
-  )
+  return <FormControlComp {...props}><textarea {...input} {...restProps} /></FormControlComp>
+}
+
+export const Input: FC<any> = (props) => {
+  const {input, meta, child, ...restProps} = props;
+
+  return <FormControlComp {...props}><input {...input} {...restProps} /></FormControlComp>
 }
