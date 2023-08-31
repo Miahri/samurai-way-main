@@ -20,8 +20,7 @@ export const authReducer = (state = initialState, action: SetUserDataActionType)
         case 'SET-USER-DATA': {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         }
         default:
@@ -32,8 +31,8 @@ export const authReducer = (state = initialState, action: SetUserDataActionType)
 export type SetUserDataActionType = ReturnType<typeof setUserData>
 
 
-export const setUserData = (userId: number | null, email: string | null, login: string | null) => {
-    return {type: 'SET-USER-DATA', data: {userId, email, login}} as const
+export const setUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+    return {type: 'SET-USER-DATA', data: {userId, email, login, isAuth}} as const
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
@@ -41,7 +40,7 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         .then(res => {
             if(res.data.resultCode === 0) {
                 let {email, id, login} = res.data.data;
-                dispatch(setUserData(id, email, login));
+                dispatch(setUserData(id, email, login, true));
             }
     })
 }
