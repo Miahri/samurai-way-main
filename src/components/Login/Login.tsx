@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
+import styles from './FormsControls.module.css';
 
 type LoginPropsType = {
   isAuth: boolean
@@ -47,7 +48,7 @@ const LoginForm = (props: any) => {
       <div>
         <Field validate={[required]} name={'rememberMe'} component={Input} type={"checkbox"}>remember me</Field>
       </div>
-      {props.error && <div>
+      {props.error && <div className={styles.formSummaryError}>
         {props.error}
       </div>}
       <div>
