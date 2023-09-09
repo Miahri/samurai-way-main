@@ -8,6 +8,13 @@ import {
 } from "../../redux/users-reducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {Users} from "./Users";
+import {
+    getAllUsers,
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize, getTotalUsersCount
+} from "../../redux/users-selectors";
 
 type UsersMapDispatchToPropsType = {
     followTC: (userID: string) => void
@@ -21,12 +28,12 @@ export type UsersContainerPropsType = UserPageType & UsersMapDispatchToPropsType
 
 const mapStateToProps = (state: AppRootStateType): UserPageType => {
     return {
-        users: state.userPage.users,
-        pageSize: state.userPage.pageSize,
-        totalUsersCount: state.userPage.totalUsersCount,
-        currentPage: state.userPage.currentPage,
-        isFetching: state.userPage.isFetching,
-        followingInProgress: state.userPage.followingInProgress
+        users: getAllUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
