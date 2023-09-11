@@ -2,7 +2,7 @@ import profileModule from "./Profile.module.css";
 import React from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../redux/profile-reducer";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
@@ -21,10 +21,10 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
             <div className={profileModule.ava}>
                 {{/*<img
                     src="https://img.freepik.com/premium-vector/illustration-concept-of-samurai-warrior_157713-245.jpg?w=2000"/>*/}}
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos.large} alt={'profile-photo'}/>
             </div>
             <div className={profileModule.description}>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
