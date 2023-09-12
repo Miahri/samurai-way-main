@@ -11,18 +11,18 @@ import styles from './FormsControls.module.css';
 type LoginPropsType = {
   isAuth: boolean
   login: (email: string, password: string, rememberMe: boolean) => void
-}
+};
 
 const mapStateToProps = (state: AppRootStateType) => {
   return {
     isAuth: state.authPage.isAuth
   }
-}
+};
 
 const Login = (props: LoginPropsType) => {
   const onSubmit = (formData: any) => {
     props.login(formData.email, formData.password, formData.rememberMe);
-  }
+  };
 
   if (props.isAuth) {
     return <Redirect to={'/profile'} />
@@ -56,7 +56,7 @@ const LoginForm = (props: any) => {
       </div>
     </form>
   )
-}
+};
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 

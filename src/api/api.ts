@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: {
     "API-KEY": "c85010c8-14b3-4039-b4af-7e02411657e5"
   }
-})
+});
 
 export const userAPI = {
   getUsers(currentPage: number, pageSize: number) {
@@ -27,7 +27,7 @@ export const userAPI = {
         return res.data;
       })
   }
-}
+};
 
 export const profileAPI = {
   getUserProfile(userId: string) {
@@ -39,7 +39,7 @@ export const profileAPI = {
   updateStatus(status: string) {
     return instance.put(`profile/status/`, {status: status});
   }
-}
+};
 
 export const authAPI = {
   me() {
@@ -51,5 +51,5 @@ export const authAPI = {
   logout(){
     return instance.delete('auth/login');
   }
-}
+};
 
