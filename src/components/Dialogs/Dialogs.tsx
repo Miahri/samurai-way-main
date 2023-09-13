@@ -1,5 +1,5 @@
 import React from 'react';
-import dialogsModule from './Dialogs.module.css'
+import dialogsModule from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsType, MessagesType} from "../../redux/state";
@@ -7,23 +7,23 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
-type DialogPropsType = {
+type DialogsPropsType = {
   newMessageText: string
   dialogs: Array<DialogsType>
   messages: Array<MessagesType>
   isAuth: boolean
   sendMessage: (values: any) => void
-}
+};
 
 const maxLength50 = maxLengthCreator(50);
 
-export const Dialogs = (props: DialogPropsType) => {
-  let dialogItems = props.dialogs.map((d: DialogsType) => <DialogItem id={d.id} name={d.name}/>)
-  let messageItems = props.messages.map((m: MessagesType) => <Message message={m.message}/>)
+export const Dialogs = (props: DialogsPropsType) => {
+  let dialogItems = props.dialogs.map((d: DialogsType) => <DialogItem id={d.id} name={d.name}/>);
+  let messageItems = props.messages.map((m: MessagesType) => <Message message={m.message}/>);
 
   const sendMessage = (values: any) => {
     props.sendMessage(values.newMessageBody)
-  }
+  };
 
   return (
     <div className={dialogsModule.dialogsWrapper}>
@@ -49,7 +49,6 @@ const AddMessageForm = (props: any) => {
         <button>Send message</button>
       </div>
     </form>
-
   )
 };
 

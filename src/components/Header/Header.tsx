@@ -6,7 +6,7 @@ type HeaderPropsType = {
   isAuth: boolean
   login: string | null
   logout: () => void
-}
+};
 
 export function Header(props: HeaderPropsType) {
   return (
@@ -22,4 +22,3 @@ export function Header(props: HeaderPropsType) {
     </header>
   );
 }
-

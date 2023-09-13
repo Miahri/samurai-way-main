@@ -2,11 +2,11 @@ import {getAuthUserData} from "./auth-reducer";
 
 type AppPageType = {
   initialized: boolean
-}
+};
 
 let initialState = {
   initialized: false
-}
+};
 
 export const appReducer = (state = initialState, action: SetInitializedActionType): AppPageType => {
   switch (action.type) {
@@ -21,8 +21,7 @@ export const appReducer = (state = initialState, action: SetInitializedActionTyp
   }
 }
 
-export type SetInitializedActionType = ReturnType<typeof setInitialized>
-
+export type SetInitializedActionType = ReturnType<typeof setInitialized>;
 
 export const setInitialized = () => {
   return {type: 'SET-INITIALIZED'} as const

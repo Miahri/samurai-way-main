@@ -9,16 +9,16 @@ import {Textarea} from "../../../common/FormsControls/FormsControls";
 type MyPostPropsType = {
   posts: Array<PostsType>
   addPost: (newPostText: string) => void
-}
+};
 
 const maxLength10 = maxLengthCreator(10);
 
 export function MyPosts(props: MyPostPropsType) {
-  let postItems = props.posts.map((p: PostsType) => <Post message={p.message} likes={p.likesCount}/>)
+  let postItems = props.posts.map((p: PostsType) => <Post message={p.message} likes={p.likesCount}/>);
 
   const addPost = (values: any) => {
     props.addPost(values.newPostText)
-  }
+  };
 
   return (
     <div className={myPostsModule.content}>
