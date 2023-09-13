@@ -7,10 +7,10 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./common/Preloader/Preloader";
-import {AppRootStateType} from "./redux/redux-store";
+import {AppRootStateType, store} from "./redux/redux-store";
 
 type AppPropsType = {
   initializeApp: () => void
@@ -53,8 +53,15 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
   }
 }
 
-export default compose(
+const AppContainer = compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, {initializeApp})
 )(App);
 
+export const SamuraiJSApp = () => {
+  return <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  </BrowserRouter>
+}
