@@ -3,8 +3,8 @@ import {sendMessageActionCreator} from "../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
-import {Redirect} from "react-router-dom";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DialogsMapDispatchToPropsType = {
   sendMessage: (newMessageBody: string) => void
@@ -26,18 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DialogsMapDispatchToPropsType =
   }
 };
 
-/*export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
-)(Dialogs)*/
-
-
-//need to delete
-//let AuthRedirectComponent = withAuthRedirect(Dialogs);
-
-let AuthRedirectComponent = (props: any) => {
-  if (!props.isAuth) return <Redirect to={"/login"}/>
-  return <Dialogs {...props} />
-};
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export const DialogsContainer = compose<React.ComponentType>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs);
