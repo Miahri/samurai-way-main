@@ -35,14 +35,13 @@ export const setUserData = (userId: number | null, email: string | null, login: 
   return {type: 'SET-USER-DATA', data: {userId, email, login, isAuth}} as const
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-  return authAPI.me()
-    .then(res => {
-      if (res.data.resultCode === 0) {
-        let {email, id, login} = res.data.data;
-        dispatch(setUserData(id, email, login, true));
-      }
-    })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+  let res = await authAPI.me();
+
+  if (res.data.resultCode === 0) {
+    let {email, id, login} = res.data.data;
+    dispatch(setUserData(id, email, login, true));
+  }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
