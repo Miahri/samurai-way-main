@@ -139,25 +139,24 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
 export const unfollowTC = (userId: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(setFollowingInProgress(true, userId));
-    userAPI.unfollow(userId).then(data => {
-      if (data.resultCode === 0) {
-        dispatch(unfollow(userId))
-      }
-      dispatch(setFollowingInProgress(false, userId));
-    })
+    let apiMethod = userAPI.unfollow.bind(userAPI);
+    followUnfollowFlow(dispatch, userId, apiMethod, follow);
   }
 }
 
 export const followTC = (userId: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(setFollowingInProgress(true, userId));
-    userAPI.follow(userId).then(data => {
-      if (data.resultCode === 0) {
-        dispatch(follow(userId))
-      }
-      dispatch(setFollowingInProgress(false, userId));
-    })
+    let apiMethod = userAPI.follow.bind(userAPI);
+    followUnfollowFlow(dispatch, userId, apiMethod, follow);
   }
 }
 
+const followUnfollowFlow = async (dispatch: Dispatch, userId: string, apiMethod: any, actionCreator: typeof follow | typeof unfollow) => {
+  dispatch(setFollowingInProgress(true, userId));
+  let res = await apiMethod(userId);
+
+  if (res.data.resultCode === 0) {
+    dispatch(actionCreator(userId));
+  }
+  dispatch(setFollowingInProgress(false, userId));
+}
