@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {userAPI} from "../api/api";
+import {updateObjectInArray} from "../utils/object-helpers";
 
 type LocationType = {
   city: string
@@ -42,13 +43,13 @@ export const usersReducer = (state = initialState, action: UserPageActionsType):
     case 'FOLLOW': {
       return {
         ...state,
-        users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)
+        users: updateObjectInArray(state.users, "id", action.userID, {followed: true})
       }
     }
     case 'UNFOLLOW': {
       return {
         ...state,
-        users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
+        users: updateObjectInArray(state.users, "id", action.userID, {followed: false})
       }
     }
     case 'SET-USERS': {
