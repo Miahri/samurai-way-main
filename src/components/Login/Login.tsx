@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {required} from "../../utils/validators/validators";
 import {Input} from "../../common/FormsControls/FormsControls";
 import {connect} from "react-redux";
@@ -13,6 +13,12 @@ type LoginPropsType = {
   login: (email: string, password: string, rememberMe: boolean) => void
 };
 
+type FormDataType = {
+  email: string
+  password: string
+  rememberMe: boolean
+}
+
 const mapStateToProps = (state: AppRootStateType) => {
   return {
     isAuth: state.authPage.isAuth
@@ -20,7 +26,7 @@ const mapStateToProps = (state: AppRootStateType) => {
 };
 
 const Login = (props: LoginPropsType) => {
-  const onSubmit = (formData: any) => {
+  const onSubmit = (formData: FormDataType) => {
     props.login(formData.email, formData.password, formData.rememberMe);
   };
 
@@ -36,9 +42,9 @@ const Login = (props: LoginPropsType) => {
   );
 };
 
-const LoginForm = (props: any) => {
+const LoginForm = (props: InjectedFormProps<FormDataType>) => {
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.handleSubmit}>
       <div>
         <Field validate={[required]} placeholder={"Login"} name={'login'} component={Input}></Field>
       </div>
@@ -58,6 +64,6 @@ const LoginForm = (props: any) => {
   )
 };
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
 
 export default connect(mapStateToProps, {login})(Login);
