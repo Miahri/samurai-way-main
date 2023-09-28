@@ -5,11 +5,12 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {StateType} from "./redux/state";
+import {StateType, StoreType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
     dispatch: (action: any) => void
+    store: StoreType
 }
 
 export function App(props: AppPropsType) {

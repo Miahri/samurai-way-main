@@ -8,12 +8,16 @@ import {App} from "./App";
 export let rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.getState()}
-                 dispatch={store.dispatch.bind(store)}/>
+            <App state={state}
+                 dispatch={store.dispatch.bind(store)}
+                 store={store}/>
         </BrowserRouter>, document.getElementById('root')
     );
 }
 
 rerenderEntireTree(store.getState());
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+    let state = store.getState();
+    rerenderEntireTree(state);
+});
 
